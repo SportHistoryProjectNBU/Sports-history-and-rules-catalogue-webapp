@@ -1,0 +1,35 @@
+.busi-btn{    border-radius: 0px;	color: #003333 !important;	font-size: 18px; font-weight: 400; }
+.busi-btn:hover{	border-radius: 0px;	color: #ff3c2d !important;	font-size: 18px; font-weight: 400; }
+.busi-btn-active,.busi-btn-active:hover{	border-radius: 0px;	color: #ff3c2d !important;	font-size: 18px; font-weight: 400; }
+
+
+.hom_nav_btn_red{  /* sign-up button  */
+  border-radius: 0px;
+  background-color:#ff3333; /* red color */
+  border:0px !important;
+  font-size:18px;
+  font-weight: 400;
+  padding: 7px 30px;
+  margin: 0 -25px;
+}
+.hom_nav_btn{
+  border-radius: 0px;
+  color:#003333 !important; /* blue color */
+  font-size:18px;
+  font-weight: 400;
+  padding: 7px 30px;
+}
+.navbar-centerr{
+  float:none;
+  margin: 0 auto;
+  display: table;
+  table-layout: fixed;
+}
+
+.business-logo-align {
+  float: left;
+  padding: 5px 25px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 50px;
+}
