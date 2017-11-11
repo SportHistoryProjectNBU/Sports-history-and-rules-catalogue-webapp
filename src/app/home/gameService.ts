@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
-import {Game} from '../entities/game';
+import {FootballGames} from './FootballGames';
 
 @Injectable()
 export class GameService {
@@ -12,12 +12,15 @@ export class GameService {
 
   }
 
-  getAllGames(): Promise<Game> {
-    return this._http.get('/api/games/all',
-      {
-        withCredentials: true
-      })
+
+  getAllGames(): Promise<FootballGames> {
+    const headers = new Headers();
+    headers.append('X-Auth-Token', '073055c75ffe42be95808bc4397d6a5b');
+
+    return this._http.get('http://api.football-data.org/v1/fixtures/',{
+      headers: headers
+    })
       .toPromise()
-      .then(response => response.json() as Game);
+      .then(response => response.json() as FootballGames);
   }
 }
