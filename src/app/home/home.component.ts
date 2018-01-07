@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GameService} from './gameService';
 import {FootballGames} from './FootballGames';
-import {Fixture} from './fixture';
+import {Game} from '../entities/Game';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,22 +11,36 @@ import {Fixture} from './fixture';
 })
 export class HomeComponent implements OnInit {
   footballGames: FootballGames;
+  games: Game[];
 
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService,
+              private router: Router) {
+    this.footballGames = new FootballGames();
+    this.gameService.getAllGamesFromAPI().then((resp) => {
+      this.footballGames = resp;
+      this.gameService.insertNewGame(this.footballGames.fixtures).then((respoz) => {
+        this.gameService.getAllGamesFromBackend().then((responseBackend) => {this.games = responseBackend;
+        });
+      });
+    });
   }
 
   ngOnInit() {
-    this.footballGames = new FootballGames();
-    this.gameService.getAllGames().then((resp) => this.footballGames = resp);
   }
 
-  footballStatus(footballgame: Fixture) {
+  footballStatus(footballgame: Game) {
     if (footballgame.status === 'TIMED') {
       return 1;
     } else if (footballgame.status === 'POSTPONED') {
       return 2;
-    } else {
+    } else if (footballgame.status === 'CANCELED') {
       return 3;
+    } else if (footballgame.status === 'FINISHED') {
+      return 4;
     }
+  }
+
+  moreInformation(footballgame: Game) {
+    this.router.navigate(['games', footballgame.id]);
   }
 }

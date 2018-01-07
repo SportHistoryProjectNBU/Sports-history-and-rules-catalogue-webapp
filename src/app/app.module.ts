@@ -12,6 +12,7 @@ import {HttpModule} from '@angular/http';
 import {GameService} from './home/gameService';
 import { LoginComponent } from './login/login.component';
 import {RegisterListener} from './listeners/registerListener';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {RegisterListener} from './listeners/registerListener';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
+    GamesComponent,
   ],
   imports: [
     BrowserModule,

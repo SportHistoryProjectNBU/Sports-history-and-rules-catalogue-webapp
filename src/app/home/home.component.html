@@ -14,15 +14,17 @@
         <th>AwayTeam</th>
         <th>Result</th>
       </tr>
-      <tr *ngFor="let footballgame of footballGames.fixtures">
+      <tr *ngFor="let footballgame of games">
         <td>{{footballgame.date}}</td>
         <td>{{footballgame.status}}</td>
         <td>{{footballgame.matchday}}</td>
         <td>{{footballgame.homeTeamName}}</td>
         <td>{{footballgame.awayTeamName}}</td>
-        <td *ngIf="footballStatus(footballgame)=== 3">{{footballgame.result.goalsHomeTeam}} : {{footballgame.result.goalsAwayTeam}} halftime : {{footballgame.result.halfTime.goalsHomeTeam}}: {{footballgame.result.halfTime.goalsAwayTeam}}</td>
+        <td *ngIf="footballStatus(footballgame)=== 4">{{footballgame.goalsHomeTeamFirstHalf}} : {{footballgame.goalsAwayTeamFirstHalf}} halftime : {{footballgame.goalsHomeTeamSecondHalf}}: {{footballgame.goalsAwayTeamSecondHalf}}</td>
         <td *ngIf="footballStatus(footballgame)=== 1">Forthcoming</td>
+        <td *ngIf="footballStatus(footballgame)=== 3">CANCELED</td>
         <td *ngIf="footballStatus(footballgame)=== 2"></td>
+        <td><button class="btn btn-success" (click)="moreInformation(footballgame)">More</button></td>
       </tr>
       </thead>
       <tbody>
