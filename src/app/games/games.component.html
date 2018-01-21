@@ -1,6 +1,46 @@
-<p>
-  {{game?.id}}
-  {{game?.homeTeamName}}
-  {{game?.awayTeamName}}
-  {{game?.status}}
-</p>
+
+  <div id="rating">
+    <input *ngIf="!isUserVoted" type="radio" value="home" name="rating" (click)="setHome()"> <p *ngIf="!isUserVoted">{{game?.homeTeamName}} </p>
+    <input *ngIf="!isUserVoted" type="radio" value="away" name="rating" (click)="setAway()"> <p *ngIf="!isUserVoted">{{game?.awayTeamName}} </p>
+    <button *ngIf="!isUserVoted" type="submit" (click) = 'sendRating()'> Vote </button>
+    <p *ngIf="isUserVoted">YOU HAVE ALREADY VOTED</p>
+    <div>
+      <div>Who is gonna win</div>
+      <div>{{game?.homeTeamName}} -{{homeRating}}    :    {{game?.awayTeamName}} - {{awayRating}}</div>
+    </div>
+  </div>
+
+
+
+
+
+<div>
+  <textarea  (input) = "commentText = $event.target.value" > </textarea>
+  <button type="submit" (click) = 'addComment()'>Add Comment</button>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="page-header">
+          <h1><small class="pull-right">{{comments.length}}</small> Comments </h1>
+        </div>
+        <div class="comments-list">
+          <div *ngFor="let comment of comments" class="media">
+            <p class="pull-right"><small>{{comment.date | date:'short'}}</small></p>
+            <a class="media-left" href="#">
+            </a>
+            <div class="media-body">
+
+              <h4 class="media-heading user_name">{{comment.userName}}</h4>
+              {{comment.comment}}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

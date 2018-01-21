@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 import {FootballGames} from './FootballGames';
 import {Fixture} from './fixture';
 import {Game} from '../entities/Game';
+import {Comment} from '../entities/Comment';
+import {Rating} from '../entities/Rating';
 
 @Injectable()
 export class GameService {
@@ -46,6 +48,40 @@ export class GameService {
       withCredentials: true
     }).toPromise()
       .then(response => response.json() as Game);
+  }
+
+  sendComment(comment: Comment): Promise<any> {
+
+    return this._http.post('/api/comments', comment, {
+      withCredentials: true
+    })
+      .toPromise()
+      .then(response => response.json() as Comment);
+  }
+
+  getAllComments(id: string): Promise<Comment[]> {
+    const comment = new Comment();
+    comment.matchId = id;
+    return this._http.put('api/comments', comment, {
+      withCredentials: true
+    }).toPromise()
+      .then(response => response.json() as Comment[]);
+  }
+
+  sendRating(rating: Rating): Promise<any> {
+
+    return this._http.post('/api/rating', rating, {
+      withCredentials: true
+    })
+      .toPromise()
+      .then(response => response.json() as Rating);
+  }
+
+  getRating(rating: Rating): Promise<any> {
+    return this._http.put('/api/rating', rating, {
+      withCredentials: true
+    }).toPromise()
+      .then(response => response.json() as Rating []);
   }
 
 }

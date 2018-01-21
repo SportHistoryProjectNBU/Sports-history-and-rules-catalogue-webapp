@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   footballStatus(footballgame: Game) {
     if (footballgame.status === 'TIMED') {
       return 1;
-    } else if (footballgame.status === 'POSTPONED') {
+    } else if (footballgame.status === 'IN_PLAY') {
       return 2;
     } else if (footballgame.status === 'CANCELED') {
       return 3;

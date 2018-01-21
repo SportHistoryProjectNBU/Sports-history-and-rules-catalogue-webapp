@@ -13,6 +13,7 @@ import {GameService} from './home/gameService';
 import { LoginComponent } from './login/login.component';
 import {RegisterListener} from './listeners/registerListener';
 import { GamesComponent } from './games/games.component';
+import {AuthGuard} from './AuthGuard';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { GamesComponent } from './games/games.component';
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [LoginRegisterService, GameService, RegisterListener],
+  providers: [LoginRegisterService, GameService, RegisterListener, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

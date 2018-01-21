@@ -23,7 +23,7 @@
         <td *ngIf="footballStatus(footballgame)=== 4">{{footballgame.goalsHomeTeamFirstHalf}} : {{footballgame.goalsAwayTeamFirstHalf}} halftime : {{footballgame.goalsHomeTeamSecondHalf}}: {{footballgame.goalsAwayTeamSecondHalf}}</td>
         <td *ngIf="footballStatus(footballgame)=== 1">Forthcoming</td>
         <td *ngIf="footballStatus(footballgame)=== 3">CANCELED</td>
-        <td *ngIf="footballStatus(footballgame)=== 2"></td>
+        <td *ngIf="footballStatus(footballgame)=== 2"> Playing</td>
         <td><button class="btn btn-success" (click)="moreInformation(footballgame)">More</button></td>
       </tr>
       </thead>
