@@ -117,6 +117,18 @@
 /*!
 // CodePen house keeping
 */
+
+table {
+  width: 100%;
+}
+
+table tbody{
+  width: 100%;
+}
+
+table tbody tr {
+  width: 100%;
+}
 body {
   margin: 0;
   padding: 25px;

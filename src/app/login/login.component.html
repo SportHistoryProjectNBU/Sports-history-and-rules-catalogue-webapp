@@ -33,6 +33,7 @@
 
             <div class="control-group">
               <!-- Button -->
+              <p *ngIf="invalidUserPass" class="invalid">Invalid username/password!</p>
               <div class="controls">
                 <button class="btn btn-lg btn-success" (click)="onSubmit()">Login</button>
               </div>

@@ -59,6 +59,7 @@
 
             <div class="control-group">
               <!-- Button -->
+              <p *ngIf="userExists" class="exists">Username is already taken!</p>
               <div class="controls">
                 <button class="btn btn-lg btn-success" (click)="onSubmit()">Register</button>
               </div>

@@ -26,6 +26,9 @@
             <td *ngIf="footballStatus(footballgame)=== 1">Forthcoming</td>
             <td *ngIf="footballStatus(footballgame)=== 3">CANCELED</td>
             <td *ngIf="footballStatus(footballgame)=== 2"> Playing</td>
+            <td *ngIf="footballStatus(footballgame)=== 5">POSTPONED</td>
+            <td *ngIf="footballStatus(footballgame)=== 6">Forthcoming</td>
+            <td *ngIf="footballStatus(footballgame)=== 7"></td>
             <td><button class="btn btn-success" (click)="moreInformation(footballgame)">More</button></td>
           </tr>
           </thead>

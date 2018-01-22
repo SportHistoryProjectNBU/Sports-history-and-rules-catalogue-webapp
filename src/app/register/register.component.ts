@@ -12,6 +12,7 @@ import {RegisterListener} from '../listeners/registerListener';
 })
 export class RegisterComponent implements OnInit {
   createUserForm: FormGroup;
+  userExists: boolean;
 
   constructor(private loginRegisterService: LoginRegisterService,
               private router: Router,
@@ -19,6 +20,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userExists = false;
     this.createUserForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
       name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
@@ -41,6 +43,10 @@ export class RegisterComponent implements OnInit {
       localStorage.setItem('userName', resp.userName);
       this.listener.sendIsItLogin('true');
       this.router.navigateByUrl('');
+    }).catch((error) => {
+      if (error.status === 400) {
+        this.userExists = true;
+      }
     });
   }
 

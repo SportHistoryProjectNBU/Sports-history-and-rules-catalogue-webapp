@@ -19,8 +19,17 @@ export class HomeComponent implements OnInit {
     this.gameService.getAllGamesFromAPI().then((resp) => {
       this.footballGames = resp;
       this.gameService.insertNewGame(this.footballGames.fixtures).then((respoz) => {
-        this.gameService.getAllGamesFromBackend().then((responseBackend) => {this.games = responseBackend;
+        this.gameService.getAllGamesFromBackend().then((responseBackend) => {
+          this.games = responseBackend;
         });
+      }).catch((error) => {
+        if(error.status === 403) {
+          localStorage.removeItem('id');
+          localStorage.removeItem('name');
+          localStorage.removeItem('username');
+          localStorage.removeItem('login');
+          router.navigateByUrl('/login');
+        }
       });
     });
   }
@@ -37,6 +46,12 @@ export class HomeComponent implements OnInit {
       return 3;
     } else if (footballgame.status === 'FINISHED') {
       return 4;
+    } else if (footballgame.status === 'POSTPONED') {
+      return 5;
+    } else if (footballgame.status === 'SCHEDULED') {
+      return 6;
+    } else {
+      return 7;
     }
   }
 

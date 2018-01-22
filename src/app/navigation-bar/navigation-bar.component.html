@@ -9,7 +9,7 @@
     </button>
 
     <div class="col-md-10" >
-      <h2 style="color: green; font-weight: bold;">SportsVoting</h2>
+      <h2 style="color: green; font-weight: bold; cursor: pointer" (click)="redirect()">SportsVoting</h2>
     </div>
 
   </div>
@@ -18,16 +18,9 @@
     <ul class="nav navbar-nav navbar-right">
       <li *ngIf="!login" class="col-md-6 col-xs-6 text-center"> <a><button type="button" class=" btn btn-default hom_nav_btn " routerLink="login">Log in</button></a></li>
       <li  *ngIf="!login " class="col-md-6 col-xs-6 text-center"><a><button type="button" class="btn btn-danger hom_nav_btn_red" routerLink="/register">Sign up</button></a></li>
+      <li *ngIf="login " class="col-md-6 col-xs-6 text-center"><a>Welcome, {{name}}</a></li>
       <li *ngIf="login " class="col-md-6 col-xs-6 text-center"><a><button  type="button" class="btn btn-danger hom_nav_btn_red" (click)="logout()">Logout</button></a></li>
     </ul>
 
-   <!-- <div class=" col-xs-9 col-sm-12 col-md-8 pd-t-10" >
-      <ul class="nav navbar-nav  navbar-centerr">
-        <li><a href="#" class="busi-btn-active">Click One</a></li>
-        <li><a href="#" class="busi-btn">Click Two</a></li>
-        <li><a href="#" class="busi-btn">Click Three</a></li>
-        <li><a href="#" class="busi-btn">Click Four</a></li>
-      </ul>
-    </div>-->
   </div>
 </nav>

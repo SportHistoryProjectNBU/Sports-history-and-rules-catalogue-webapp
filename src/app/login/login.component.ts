@@ -13,6 +13,7 @@ import {RegisterListener} from '../listeners/registerListener';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  invalidUserPass: boolean
 
   constructor(private loginRegisterService: LoginRegisterService,
               private router: Router,
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.invalidUserPass = false;
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
       password: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
@@ -37,6 +39,10 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userName', resp.userName);
       this.loginListener.sendIsItLogin('true');
       this.router.navigateByUrl('');
+    }).catch((error) => {
+      if(error.status === 400) {
+        this.invalidUserPass = true;
+      }
     });
   }
 }
