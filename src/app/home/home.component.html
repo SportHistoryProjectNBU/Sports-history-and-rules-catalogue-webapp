@@ -1,35 +1,39 @@
-<div class="container">
-  <div class="row">
+<div class="container" style="margin-top: 100px ; width: 90%">
+  <div class="panel panel-default" style="background-color: rgb(244, 248, 255)">
+    <div class="panel-body" style="margin: 30px">
+      <div class="row">
 
-    <h1>CSS only Responsive Tables</h1>
-    <h2>Basic overflow:</h2>
+        <h1>Games</h1>
+        <h2>Schedule:</h2>
 
-    <table class="table table-hove  rtable">
-      <thead>
-      <tr>
-        <th>DATE</th>
-        <th>STATUS</th>
-        <th>MATCHDAY</th>
-        <th>HomeTeam</th>
-        <th>AwayTeam</th>
-        <th>Result</th>
-      </tr>
-      <tr *ngFor="let footballgame of games">
-        <td>{{footballgame.date}}</td>
-        <td>{{footballgame.status}}</td>
-        <td>{{footballgame.matchday}}</td>
-        <td>{{footballgame.homeTeamName}}</td>
-        <td>{{footballgame.awayTeamName}}</td>
-        <td *ngIf="footballStatus(footballgame)=== 4">{{footballgame.goalsHomeTeamFirstHalf}} : {{footballgame.goalsAwayTeamFirstHalf}} halftime : {{footballgame.goalsHomeTeamSecondHalf}}: {{footballgame.goalsAwayTeamSecondHalf}}</td>
-        <td *ngIf="footballStatus(footballgame)=== 1">Forthcoming</td>
-        <td *ngIf="footballStatus(footballgame)=== 3">CANCELED</td>
-        <td *ngIf="footballStatus(footballgame)=== 2"> Playing</td>
-        <td><button class="btn btn-success" (click)="moreInformation(footballgame)">More</button></td>
-      </tr>
-      </thead>
-      <tbody>
+        <table class="table table-hove  rtable">
+          <thead>
+          <tr>
+            <th>DATE</th>
+            <th>STATUS</th>
+            <th>MATCHDAY</th>
+            <th>HomeTeam</th>
+            <th>AwayTeam</th>
+            <th>Result</th>
+          </tr>
+          <tr *ngFor="let footballgame of games">
+            <td>{{footballgame.date}}</td>
+            <td>{{footballgame.status}}</td>
+            <td>{{footballgame.matchday}}</td>
+            <td>{{footballgame.homeTeamName}}</td>
+            <td>{{footballgame.awayTeamName}}</td>
+            <td *ngIf="footballStatus(footballgame)=== 4">{{footballgame.goalsHomeTeamFirstHalf}} : {{footballgame.goalsAwayTeamFirstHalf}} halftime : {{footballgame.goalsHomeTeamSecondHalf}}: {{footballgame.goalsAwayTeamSecondHalf}}</td>
+            <td *ngIf="footballStatus(footballgame)=== 1">Forthcoming</td>
+            <td *ngIf="footballStatus(footballgame)=== 3">CANCELED</td>
+            <td *ngIf="footballStatus(footballgame)=== 2"> Playing</td>
+            <td><button class="btn btn-success" (click)="moreInformation(footballgame)">More</button></td>
+          </tr>
+          </thead>
+          <tbody>
 
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

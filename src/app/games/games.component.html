@@ -1,46 +1,66 @@
 
-  <div id="rating">
-    <input *ngIf="!isUserVoted" type="radio" value="home" name="rating" (click)="setHome()"> <p *ngIf="!isUserVoted">{{game?.homeTeamName}} </p>
-    <input *ngIf="!isUserVoted" type="radio" value="away" name="rating" (click)="setAway()"> <p *ngIf="!isUserVoted">{{game?.awayTeamName}} </p>
-    <button *ngIf="!isUserVoted" type="submit" (click) = 'sendRating()'> Vote </button>
-    <p *ngIf="isUserVoted">YOU HAVE ALREADY VOTED</p>
-    <div>
-      <div>Who is gonna win</div>
-      <div>{{game?.homeTeamName}} -{{homeRating}}    :    {{game?.awayTeamName}} - {{awayRating}}</div>
-    </div>
-  </div>
+<div class="container" style="margin-top: 100px">
+  <div class="panel panel-default" style="background-color: rgb(244, 248, 255)">
+    <div class="panel-body">
 
 
 
+      <h1 style="text-align: center; font-weight: bold;">Vote for winner</h1>
+      <br>
+      <br>
 
 
-<div>
-  <textarea  (input) = "commentText = $event.target.value" > </textarea>
-  <button type="submit" (click) = 'addComment()'>Add Comment</button>
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="page-header">
-          <h1><small class="pull-right">{{comments.length}}</small> Comments </h1>
-        </div>
-        <div class="comments-list">
-          <div *ngFor="let comment of comments" class="media">
-            <p class="pull-right"><small>{{comment.date | date:'short'}}</small></p>
-            <a class="media-left" href="#">
-            </a>
-            <div class="media-body">
-
-              <h4 class="media-heading user_name">{{comment.userName}}</h4>
-              {{comment.comment}}
-
-            </div>
-          </div>
-
+      <div id="rating" style="text-align: center;">
+        <input *ngIf="!isUserVoted" type="radio" value="home" name="rating" (click)="setHome()"> <p *ngIf="!isUserVoted" style="font-size: 160%" >{{game?.homeTeamName}} </p>
+        <h4>or</h4>
+        <input *ngIf="!isUserVoted" type="radio" value="away" name="rating" (click)="setAway()"> <p *ngIf="!isUserVoted" style="font-size: 160%">{{game?.awayTeamName}} </p>
+        <button *ngIf="!isUserVoted" type="submit" class="btn btn-lg btn-warning" style="width: 10%" (click) = 'sendRating()'> Vote </button>
+        <p *ngIf="isUserVoted">YOU HAVE ALREADY VOTED</p>
+        <br>
+        <br>
+        <div>
+          <div><h2>Who is going to win results:</h2></div>
+          <div style="font-size: 140%">{{game?.homeTeamName}} -{{homeRating}}    :    {{game?.awayTeamName}} - {{awayRating}}</div>
         </div>
       </div>
+
+
+      <br>
+      <br>
+      <hr>
+
+
+      <div>
+        <textarea class="form-control" style="width: 50%" rows="5" (input) = "commentText = $event.target.value" > </textarea>
+        <br>
+        <button type="submit" class="btn btn-lg btn-primary" (click) = 'addComment()'>Add Comment</button>
+
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="page-header">
+                <h1><small class="pull-right">{{comments.length}}</small> Comments </h1>
+              </div>
+              <div class="comments-list">
+                <div *ngFor="let comment of comments" class="media">
+                  <p class="pull-right"><small>{{comment.date | date:'short'}}</small></p>
+                  <a class="media-left" href="#">
+                  </a>
+                  <div class="media-body">
+
+                    <h4 class="media-heading user_name">{{comment.userName}}</h4>
+                    {{comment.comment}}
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-
