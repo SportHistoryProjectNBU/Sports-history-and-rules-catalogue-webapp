@@ -1,34 +1,48 @@
-<form class="form-horizontal" [formGroup]="loginForm">
-  <fieldset>
-    <div id="legend">
-      <legend class="">Register</legend>
-    </div>
-    <div class="control-group">
-      <!-- Username -->
-      <label class="control-label" for="username">Username</label>
-      <div class="controls">
-        <input type="text" id="username" name="username" placeholder="" formControlName="username" class="input-xlarge">
-        <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+<div class="modal show" style="margin-top: 150px">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Login</h4>
       </div>
-    </div>
+      <div class="modal-body">
+
+        <form class="form-horizontal" [formGroup]="loginForm">
+          <fieldset>
+
+            <div class="control-group">
+              <!-- Username -->
+              <label class="control-label" for="username">Username</label>
+              <div class="controls">
+                <input type="text" id="username" name="username" placeholder="" formControlName="username" class="form-control">
+                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+              </div>
+            </div>
 
 
-    <div class="control-group">
-      <!-- Password-->
-      <label class="control-label" for="password">Password</label>
-      <div class="controls">
-        <input type="password" id="password" name="password" formControlName="password" placeholder="" class="input-xlarge">
-        <p class="help-block">Password should be at least 4 characters</p>
+            <div class="control-group">
+              <!-- Password-->
+              <label class="control-label" for="password">Password</label>
+              <div class="controls">
+                <input type="password" id="password" name="password" formControlName="password" placeholder="" class="form-control">
+                <p class="help-block">Password should be at least 4 characters</p>
+              </div>
+            </div>
+
+            <hr>
+
+
+            <div class="control-group">
+              <!-- Button -->
+              <div class="controls">
+                <button class="btn btn-lg btn-success" (click)="onSubmit()">Login</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
       </div>
-    </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 
-    <div class="control-group">
-      <!-- Button -->
-      <div class="controls">
-        <button class="btn btn-success" (click)="onSubmit()">Register</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
-
+</div>
 

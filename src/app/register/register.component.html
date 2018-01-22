@@ -1,62 +1,73 @@
-<form class="form-horizontal" [formGroup]="createUserForm">
-  <fieldset>
-    <div id="legend">
-      <legend class="">Register</legend>
-    </div>
-    <div class="control-group">
-      <!-- Username -->
-      <label class="control-label" for="username">Username</label>
-      <div class="controls">
-        <input type="text" id="username" name="username" placeholder="" formControlName="username" class="input-xlarge">
-        <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+<div class="modal show" style="margin-top: 100px">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Register</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <form class="form-horizontal" [formGroup]="createUserForm">
+          <fieldset>
+            <div class="control-group">
+              <!-- Username -->
+              <label class="control-label" for="username">Username</label>
+              <div class="controls">
+                <input type="text" id="username" name="username" placeholder="" formControlName="username" class="form-control">
+                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <!-- name -->
+              <label class="control-label" for="name">Name</label>
+              <div class="controls">
+                <input type="text" id="name" name="name" placeholder="" formControlName="name" class="form-control">
+                <p class="help-block">Username can contain any letters or numbers, without spaces</p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <!-- Password-->
+              <label class="control-label" for="password">Password</label>
+              <div class="controls">
+                <input type="password" id="password" name="password" formControlName="password" placeholder="" class="form-control">
+                <p class="help-block">Password should be at least 4 characters</p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <!-- Password -->
+              <label class="control-label" for="password_confirm">Password (Confirm)</label>
+              <div class="controls">
+                <input type="password" id="password_confirm" name="password_confirm" formControlName="confirmPassword"  placeholder="" class="form-control">
+                <p class="help-block">Please confirm password</p>
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <!-- E-mail -->
+              <label class="control-label" for="email">E-mail</label>
+              <div class="controls">
+                <input type="text" id="email" name="email" formControlName="email" placeholder="" class="form-control">
+                <p class="help-block">Please provide your E-mail</p>
+              </div>
+            </div>
+
+            <hr size="10px">
+
+            <div class="control-group">
+              <!-- Button -->
+              <div class="controls">
+                <button class="btn btn-lg btn-success" (click)="onSubmit()">Register</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
       </div>
     </div>
-
-    <div class="control-group">
-      <!-- name -->
-      <label class="control-label" for="name">Name</label>
-      <div class="controls">
-        <input type="text" id="name" name="name" placeholder="" formControlName="name" class="input-xlarge">
-        <p class="help-block">Username can contain any letters or numbers, without spaces</p>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <!-- Password-->
-      <label class="control-label" for="password">Password</label>
-      <div class="controls">
-        <input type="password" id="password" name="password" formControlName="password" placeholder="" class="input-xlarge">
-        <p class="help-block">Password should be at least 4 characters</p>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <!-- Password -->
-      <label class="control-label" for="password_confirm">Password (Confirm)</label>
-      <div class="controls">
-        <input type="password" id="password_confirm" name="password_confirm" formControlName="confirmPassword"  placeholder="" class="input-xlarge">
-        <p class="help-block">Please confirm password</p>
-      </div>
-    </div>
-
-
-    <div class="control-group">
-      <!-- E-mail -->
-      <label class="control-label" for="email">E-mail</label>
-      <div class="controls">
-        <input type="text" id="email" name="email" formControlName="email" placeholder="" class="input-xlarge">
-        <p class="help-block">Please provide your E-mail</p>
-      </div>
-    </div>
-
-
-    <div class="control-group">
-      <!-- Button -->
-      <div class="controls">
-        <button class="btn btn-success" (click)="onSubmit()">Register</button>
-      </div>
-    </div>
-  </fieldset>
-</form>
-
+  </div>
+</div>
 
