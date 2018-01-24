@@ -33,6 +33,11 @@ export class NavigationBarComponent implements OnInit {
         localStorage.removeItem('login');
         localStorage.removeItem('name');
         window.location.reload();
+      }).catch((error) => {
+        localStorage.removeItem('id');
+        localStorage.removeItem('login');
+        localStorage.removeItem('name');
+        window.location.reload();
       });
   }
 
