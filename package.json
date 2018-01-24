@@ -21,7 +21,6 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
-    "@ngx-share/core": "^5.0.0",
     "core-js": "^2.4.1",
     "ngx-bootstrap": "^1.9.3",
     "rxjs": "^5.4.2",

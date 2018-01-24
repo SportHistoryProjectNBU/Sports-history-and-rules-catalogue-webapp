@@ -15,7 +15,6 @@ import {RegisterListener} from './listeners/registerListener';
 import { GamesComponent } from './games/games.component';
 import {AuthGuard} from './AuthGuard';
 import {HttpClientModule} from '@angular/common/http';
-import { ShareModule } from '@ngx-share/core';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import { ShareModule } from '@ngx-share/core';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    ShareModule.forRoot()
   ],
   providers: [LoginRegisterService, GameService, RegisterListener, AuthGuard],
   bootstrap: [AppComponent]
