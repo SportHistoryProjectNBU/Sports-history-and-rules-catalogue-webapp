@@ -28,7 +28,7 @@ export class LoginRegisterService {
   }
 
   logout() {
-    return this._http.get('https://sport-history-backend-api.herokuapp.com/api/logout', {
+    return this._http.post('https://sport-history-backend-api.herokuapp.com/api/logout', {
       withCredentials: true
     }).toPromise();
   }
