@@ -21,7 +21,7 @@ export class GameService {
     const headers = new Headers();
     headers.append('X-Auth-Token', '073055c75ffe42be95808bc4397d6a5b');
 
-    return this._http.get('http://api.football-data.org/v1/fixtures/', {
+    return this._http.get('https://api.football-data.org/v1/fixtures/', {
       headers: headers
     })
       .toPromise()
