@@ -29,7 +29,7 @@ export class GameService {
   }
 
   insertNewGame(footballGames: Fixture[]): Promise<any> {
-    return this._http.post('/api/games', footballGames,
+    return this._http.post('https://sport-history-backend-api.herokuapp.com/api/games', footballGames,
       {
         withCredentials: true
       })
@@ -37,14 +37,14 @@ export class GameService {
   }
 
   getAllGamesFromBackend(): Promise<Game[]> {
-    return this._http.get('/api/games', {
+    return this._http.get('https://sport-history-backend-api.herokuapp.com/api/games', {
       withCredentials: true
     }).toPromise()
       .then(response => response.json() as Game[]);
   }
 
   getGameFromBackend(id: string): Promise<Game> {
-    return this._http.get('/api/games/' + id, {
+    return this._http.get('https://sport-history-backend-api.herokuapp.com/api/games/' + id, {
       withCredentials: true
     }).toPromise()
       .then(response => response.json() as Game);
@@ -52,7 +52,7 @@ export class GameService {
 
   sendComment(comment: Comment): Promise<any> {
 
-    return this._http.post('/api/comments', comment, {
+    return this._http.post('https://sport-history-backend-api.herokuapp.com/api/comments', comment, {
       withCredentials: true
     })
       .toPromise()
@@ -62,7 +62,7 @@ export class GameService {
   getAllComments(id: string): Promise<Comment[]> {
     const comment = new Comment();
     comment.matchId = id;
-    return this._http.put('api/comments', comment, {
+    return this._http.put('https://sport-history-backend-api.herokuapp.com/api/comments', comment, {
       withCredentials: true
     }).toPromise()
       .then(response => response.json() as Comment[]);
@@ -70,7 +70,7 @@ export class GameService {
 
   sendRating(rating: Rating): Promise<any> {
 
-    return this._http.post('/api/rating', rating, {
+    return this._http.post('https://sport-history-backend-api.herokuapp.com/api/rating', rating, {
       withCredentials: true
     })
       .toPromise()
@@ -78,7 +78,7 @@ export class GameService {
   }
 
   getRating(rating: Rating): Promise<any> {
-    return this._http.put('/api/rating', rating, {
+    return this._http.put('https://sport-history-backend-api.herokuapp.com/api/rating', rating, {
       withCredentials: true
     }).toPromise()
       .then(response => response.json() as Rating []);

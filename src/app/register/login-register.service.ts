@@ -13,7 +13,7 @@ export class LoginRegisterService {
   }
 
   RegisterNewUser(user: User) {
-    return this._http.post('/api/users/register', user,
+    return this._http.post('https://sport-history-backend-api.herokuapp.com/api/users/register', user,
       {
         withCredentials: true
       }).map((resp) => resp.json())
@@ -21,14 +21,14 @@ export class LoginRegisterService {
   }
 
   login(user: User) {
-    return this._http.post('/api/users/login', user, {
+    return this._http.post('https://sport-history-backend-api.herokuapp.com/api/users/login', user, {
       withCredentials: true
     }).map((resp) => resp.json())
       .toPromise();
   }
 
   logout() {
-    return this._http.get('/api/logout', {
+    return this._http.get('https://sport-history-backend-api.herokuapp.com/api/logout', {
       withCredentials: true
     }).toPromise();
   }
