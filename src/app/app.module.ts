@@ -17,8 +17,9 @@ import {AuthGuard} from './AuthGuard';
 import {HttpClientModule} from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { UsermenuComponent } from './usermenu/usermenu.component';
-import {PersonalDataComponent} from "./usermenu/personal-data/personal-data.component";
+import {PersonalDataComponent} from './usermenu/personal-data/personal-data.component';
 import { SubscribeComponent } from './usermenu/subscribe/subscribe.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SubscribeComponent } from './usermenu/subscribe/subscribe.component';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [LoginRegisterService, GameService, RegisterListener, AuthGuard],
   bootstrap: [AppComponent]

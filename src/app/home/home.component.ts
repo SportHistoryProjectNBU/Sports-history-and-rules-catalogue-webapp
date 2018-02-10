@@ -1,20 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, EventEmitter} from '@angular/core';
 import {GameService} from './gameService';
 import {FootballGames} from './FootballGames';
 import {Game} from '../entities/Game';
 import {Router} from '@angular/router';
-import {LoginRegisterService} from "../register/login-register.service";
-import {User} from "../entities/user";
-import {RegisterListener} from "../listeners/registerListener";
+import {FormControl} from '@angular/forms';
+import {Observable, Observer} from 'rxjs/Rx'
+
+export interface MyReactiveInputEvent {
+  term: string;
+  observer: Observer<any>;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
   footballGames: FootballGames;
   games: Game[];
+  sum: number = 20;
+  array: Game[] = [];
+  searchControl: FormControl = new FormControl();
+  onUpdate: EventEmitter<MyReactiveInputEvent> = new EventEmitter()
 
   constructor(private gameService: GameService,
               private router: Router) {
@@ -24,6 +33,7 @@ export class HomeComponent implements OnInit {
       this.gameService.insertNewGame(this.footballGames.fixtures).then((respoz) => {
         this.gameService.getAllGamesFromBackend().then((responseBackend) => {
           this.games = responseBackend;
+          this.appendItems(0, this.sum);
         });
       }).catch((error) => {
         if (error.status === 403) {
@@ -38,7 +48,33 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchControl.valueChanges
+      .debounceTime(500)
+      .distinctUntilChanged()
+      .switchMap((term: string) => {
+
+        this.array = []
+
+        let items = this.games.filter((e: Game) => {
+          return new RegExp(term, 'gi').test(e.homeTeamName) || new RegExp(term, 'gi').test(e.awayTeamName)
+        })
+
+        return items;
+      })
+      .subscribe((item: any) => {
+        this.array.push(item);
+      });
   }
+
+  search(event: MyReactiveInputEvent) {
+    let items = this.games.filter((e: Game) => {
+      return new RegExp(event.term, 'gi').test(e.homeTeamName)
+    })
+
+    Observable.from(items)
+      .subscribe(event.observer);
+  }
+
 
   footballStatus(footballgame: Game) {
     if (footballgame.status === 'TIMED') {
@@ -60,5 +96,29 @@ export class HomeComponent implements OnInit {
 
   moreInformation(footballgame: Game) {
     this.router.navigate(['games', footballgame.id]);
+  }
+
+  addItems(startIndex, endIndex) {
+
+    for (let i = startIndex; i < endIndex; ++i) {
+      this.array.push(this.games[i]);
+    }
+  }
+
+  appendItems(startIndex, endIndex) {
+    this.addItems(startIndex, endIndex);
+  }
+
+  onScrollDown (ev) {
+    console.log('scrolled down!!', ev);
+
+    // add another 20 items
+    const start = this.sum;
+    this.sum += 20;
+    if(this.sum >= this.games.length) {
+      // do nothing
+    }else {
+      this.appendItems(start, this.sum);
+    }
   }
 }
