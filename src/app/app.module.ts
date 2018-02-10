@@ -15,6 +15,7 @@ import {RegisterListener} from './listeners/registerListener';
 import { GamesComponent } from './games/games.component';
 import {AuthGuard} from './AuthGuard';
 import {HttpClientModule} from '@angular/common/http';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [LoginRegisterService, GameService, RegisterListener, AuthGuard],
   bootstrap: [AppComponent]
