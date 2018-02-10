@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="col-md-9">
+    <div class="input-group spinner">
+      <input [(ngModel)]="name" type="text" class="form-control" >
+
+    </div>
+    <p class="help-block">Name Change</p>
+  </div>
+
+  <div class="col-md-9">
+    <div class="input-group spinner">
+      <input [(ngModel)]="email"type="text" class="form-control" >
+
+    </div>
+    <p class="help-block">Email change</p>
+  </div>
+
+  <div class="col-md-">
+    <div class="input-group spinner">
+      <input [(ngModel)]="password" type="password" class="form-control" >
+
+    </div>
+    <p class="help-block">Password change</p>
+  </div>
+  <button class="btn btn-lg btn-success" (click)="onSubmit()">Change Data</button>
+</div>

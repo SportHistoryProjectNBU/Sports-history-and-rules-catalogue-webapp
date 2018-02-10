@@ -16,6 +16,8 @@
 
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
+      <li *ngIf="isAdmin" class="col-md-6 col-xs-6 text-center"><a><button type="button" class=" btn btn-default hom_nav_btn " routerLink="admin">Admin Panel</button></a></li>
+      <li *ngIf="login" class="col-md-6 col-xs-6 text-center"><a><button type="button" class=" btn btn-default hom_nav_btn " routerLink="usermenu">User Settings</button></a></li>
       <li *ngIf="!login" class="col-md-6 col-xs-6 text-center"> <a><button type="button" class=" btn btn-default hom_nav_btn " routerLink="login">Log in</button></a></li>
       <li  *ngIf="!login " class="col-md-6 col-xs-6 text-center"><a><button type="button" class="btn btn-danger hom_nav_btn_red" routerLink="/register">Sign up</button></a></li>
       <li *ngIf="login " class="col-md-6 col-xs-6 text-center"><a>Welcome, {{name}}</a></li>

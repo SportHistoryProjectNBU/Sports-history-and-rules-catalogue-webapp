@@ -3,6 +3,9 @@ import {GameService} from './gameService';
 import {FootballGames} from './FootballGames';
 import {Game} from '../entities/Game';
 import {Router} from '@angular/router';
+import {LoginRegisterService} from "../register/login-register.service";
+import {User} from "../entities/user";
+import {RegisterListener} from "../listeners/registerListener";
 
 @Component({
   selector: 'app-home',
@@ -23,7 +26,7 @@ export class HomeComponent implements OnInit {
           this.games = responseBackend;
         });
       }).catch((error) => {
-        if(error.status === 403) {
+        if (error.status === 403) {
           localStorage.removeItem('id');
           localStorage.removeItem('name');
           localStorage.removeItem('username');

@@ -22,7 +22,7 @@
             <td>{{footballgame.matchday}}</td>
             <td>{{footballgame.homeTeamName}}</td>
             <td>{{footballgame.awayTeamName}}</td>
-            <td *ngIf="footballStatus(footballgame)=== 4">{{footballgame.goalsHomeTeamFirstHalf}} : {{footballgame.goalsAwayTeamFirstHalf}} halftime : {{footballgame.goalsHomeTeamSecondHalf}}: {{footballgame.goalsAwayTeamSecondHalf}}</td>
+            <td *ngIf="footballStatus(footballgame)=== 4">{{footballgame.goalsHomeTeamFirstHalf}} : {{footballgame.goalsAwayTeamFirstHalf}}</td>
             <td *ngIf="footballStatus(footballgame)=== 1">Forthcoming</td>
             <td *ngIf="footballStatus(footballgame)=== 3">CANCELED</td>
             <td *ngIf="footballStatus(footballgame)=== 2"> Playing</td>

@@ -34,6 +34,7 @@
             <div class="control-group">
               <!-- Button -->
               <p *ngIf="invalidUserPass" class="invalid">Invalid username/password!</p>
+              <p *ngIf="userDisabled" class="invalid">You have been suspended!!</p>
               <div class="controls">
                 <button class="btn btn-lg btn-success" (click)="onSubmit()">Login</button>
               </div>

@@ -13,7 +13,9 @@ import {RegisterListener} from '../listeners/registerListener';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  invalidUserPass: boolean
+  invalidUserPass: boolean;
+  userDisabled: boolean;
+
 
   constructor(private loginRegisterService: LoginRegisterService,
               private router: Router,
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.invalidUserPass = false;
+    this.userDisabled = false;
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
       password: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
@@ -33,14 +36,24 @@ export class LoginComponent implements OnInit {
     user.username = this.loginForm.value.username;
     user.password = this.loginForm.value.password;
     this.loginRegisterService.login(user).then((resp) => {
-      localStorage.setItem('id', resp.id);
-      localStorage.setItem('login', 'true');
-      localStorage.setItem('name', resp.name);
-      localStorage.setItem('userName', resp.userName);
-      this.loginListener.sendIsItLogin('true');
-      this.router.navigateByUrl('');
+      if (resp.disabled != null) {
+        this.userDisabled = true;
+      } else {
+        localStorage.setItem('id', resp.id);
+        localStorage.setItem('login', 'true');
+        localStorage.setItem('name', resp.name);
+        localStorage.setItem('userName', resp.userName);
+        user.username = localStorage.getItem('userName');
+        if (resp.admin === 'ADMIN') {
+          this.loginListener.sendIsItLogin('admin');
+        } else {
+          this.loginListener.sendIsItLogin('login');
+        }
+        this.router.navigateByUrl('');
+      }
     }).catch((error) => {
-      if(error.status === 400) {
+      if (error.status === 400) {
+
         this.invalidUserPass = true;
       }
     });

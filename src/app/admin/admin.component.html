@@ -1,0 +1,35 @@
+
+<div class="container" style="margin-top: 100px ; width: 90%">
+  <div class="panel panel-default" style="background-color: rgb(244, 248, 255)">
+    <div class="panel-body" style="margin: 30px">
+      <div class="row">
+
+        <table class="table table-hove  rtable">
+          <thead>
+          <tr>
+            <th>User name</th>
+            <th>Name</th>
+            <th>e-mail</th>
+            <th>Disabled</th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr *ngFor="let user of users">
+            <td>{{user.username}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.disabled}}</td>
+            <td *ngIf="user.disabled"><button class="btn btn-success" (click)="banUser(user)">Remove Disable</button></td>
+            <td *ngIf="!user.disabled"><button class="btn btn-success" (click)="banUser(user)">Disable</button></td>
+            <td *ngIf="user.role ==='USER'"><button class="btn btn-success" (click)="setAdmin(user)">Promote to Admin</button></td>
+            <td *ngIf="user.role ==='ADMIN'"><button class="btn btn-success" (click)="setAdmin(user)">Remove Admin</button></td>
+          </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

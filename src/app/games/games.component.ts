@@ -24,7 +24,8 @@ export class GamesComponent implements OnInit {
   awayRating: number;
 
   constructor(private route: ActivatedRoute,
-              private gameService: GameService) {
+              private gameService: GameService,
+              ) {
     this.rating = new Rating();
   }
 

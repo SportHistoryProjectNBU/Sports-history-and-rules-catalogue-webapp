@@ -12,7 +12,7 @@
 
       <div id="rating" style="text-align: center;">
         <input *ngIf="!isUserVoted" type="radio" value="home" name="rating" (click)="setHome()"> <p *ngIf="!isUserVoted" style="font-size: 160%" >{{game?.homeTeamName}} </p>
-        <h4>or</h4>
+        <h4 *ngIf="!isUserVoted">or</h4>
         <input *ngIf="!isUserVoted" type="radio" value="away" name="rating" (click)="setAway()"> <p *ngIf="!isUserVoted" style="font-size: 160%">{{game?.awayTeamName}} </p>
         <button *ngIf="!isUserVoted" type="submit" class="btn btn-lg btn-warning" style="width: 10%" (click) = 'sendRating()'> Vote </button>
         <p *ngIf="isUserVoted">YOU HAVE ALREADY VOTED</p>
@@ -31,7 +31,7 @@
 
 
       <div>
-        <textarea class="form-control" style="width: 50%" rows="5" (input) = "commentText = $event.target.value" > </textarea>
+        <textarea class="form-control" id="comment-area" style="width: 50%" rows="5" (input) = "commentText = $event.target.value" > </textarea>
         <br>
         <button type="submit" class="btn btn-lg btn-primary" (click) = 'addComment()'>Add Comment</button>
 

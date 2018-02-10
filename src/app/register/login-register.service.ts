@@ -32,4 +32,36 @@ export class LoginRegisterService {
       withCredentials: true
     }).toPromise();
   }
+
+  isAdmin(user: User) {
+    return this._http.post('/api/users/admin', user, {
+      withCredentials: true
+    }).map((resp) => resp.json())
+      .toPromise();
+  }
+
+  getAllUsers() {
+    return this._http.get('/api/users/all', {
+      withCredentials: true
+    }).toPromise()
+      .then(response => response.json() as User[]);
+  }
+
+  disableUser(id: string) {
+    return this._http.post('/api/users/disableUser', id, {
+      withCredentials: true
+    }).toPromise();
+  }
+
+  setAdmin(id: string) {
+    return this._http.post('/api/users/setAdmin', id, {
+      withCredentials: true
+    }).toPromise();
+  }
+
+  changeUserData(user: User) {
+    return this._http.post('/api/users/changeData', user, {
+      withCredentials: true
+    }).toPromise();
+  }
 }
