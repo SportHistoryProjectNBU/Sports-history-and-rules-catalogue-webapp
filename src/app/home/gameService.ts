@@ -7,6 +7,7 @@ import {Fixture} from './fixture';
 import {Game} from '../entities/Game';
 import {Comment} from '../entities/Comment';
 import {Rating} from '../entities/Rating';
+import {Subscribe} from "../entities/Subscribe";
 
 @Injectable()
 export class GameService {
@@ -82,6 +83,29 @@ export class GameService {
       withCredentials: true
     }).toPromise()
       .then(response => response.json() as Rating []);
+  }
+
+  getAllIncoming(): Promise<Game[]> {
+    return this._http.get('/api/games/incoming', {
+      withCredentials: true
+    }).toPromise()
+      .then(response => response.json() as Game[]);
+  }
+
+  subscribeForGame(subscribe: Subscribe): Promise<any> {
+    return this._http.post('/api/subscribe', subscribe, {
+      withCredentials: true
+    }).map((resp) => resp.json())
+      .toPromise();
+  }
+
+  getAllSubscribesForUser(): Promise<any> {
+    const subscribe = new Subscribe();
+    subscribe.userId = localStorage.getItem('id');
+    return this._http.put('/api/subscribe/userSubscribe', subscribe, {
+      withCredentials: true
+    }).toPromise()
+      .then(response => response.json() as Subscribe[]);
   }
 
 }
