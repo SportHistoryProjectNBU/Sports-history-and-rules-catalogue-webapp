@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {NavigationBarComponent} from './navigation-bar/navigation-bar.component';
@@ -20,6 +20,7 @@ import { UsermenuComponent } from './usermenu/usermenu.component';
 import {PersonalDataComponent} from './usermenu/personal-data/personal-data.component';
 import { SubscribeComponent } from './usermenu/subscribe/subscribe.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {ShareModule} from 'ng2share/share.module';
 
 @NgModule({
   declarations: [
@@ -41,9 +42,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ShareModule
   ],
   providers: [LoginRegisterService, GameService, RegisterListener, AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }
