@@ -1,10 +1,10 @@
-import {Component, OnInit, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GameService} from './gameService';
 import {FootballGames} from './FootballGames';
 import {Game} from '../entities/Game';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {Observable, Observer} from 'rxjs/Rx'
+import {Observable, Observer, Subscription} from 'rxjs/Rx';
 
 export interface MyReactiveInputEvent {
   term: string;
@@ -23,28 +23,42 @@ export class HomeComponent implements OnInit {
   sum: number = 20;
   array: Game[] = [];
   searchControl: FormControl = new FormControl();
-  onUpdate: EventEmitter<MyReactiveInputEvent> = new EventEmitter()
+  busy: Subscription;
 
   constructor(private gameService: GameService,
               private router: Router) {
     this.footballGames = new FootballGames();
-    this.gameService.getAllGamesFromAPI().then((resp) => {
-      this.footballGames = resp;
-      this.gameService.insertNewGame(this.footballGames.fixtures).then((respoz) => {
-        this.gameService.getAllGamesFromBackend().then((responseBackend) => {
-          this.games = responseBackend;
-          this.appendItems(0, this.sum);
-        });
-      }).catch((error) => {
-        if (error.status === 403) {
-          localStorage.removeItem('id');
-          localStorage.removeItem('name');
-          localStorage.removeItem('username');
-          localStorage.removeItem('login');
-          router.navigateByUrl('/login');
-        }
-      });
-    });
+    this.busy = this.gameService
+      .getAllGamesFromAPI2()
+      .subscribe(
+         data => {
+           this.footballGames=data;
+           this.gameService.insertNewGame(this.footballGames.fixtures).then(_ => {
+                  this.gameService.getAllGamesFromBackend().then((responseBackend) => {
+                    this.games = responseBackend;
+                    this.appendItems(0, this.sum);
+                  });
+                })
+         });
+
+
+    // this.gameService.getAllGamesFromAPI().then((resp) => {
+    //   this.footballGames = resp;
+    //   this.gameService.insertNewGame(this.footballGames.fixtures).then((respoz) => {
+    //     this.gameService.getAllGamesFromBackend().then((responseBackend) => {
+    //       this.games = responseBackend;
+    //       this.appendItems(0, this.sum);
+    //     });
+    //   }).catch((error) => {
+    //     if (error.status === 403) {
+    //       localStorage.removeItem('id');
+    //       localStorage.removeItem('name');
+    //       localStorage.removeItem('username');
+    //       localStorage.removeItem('login');
+    //       router.navigateByUrl('/login');
+    //     }
+    //   });
+    // });
   }
 
   ngOnInit() {
@@ -110,8 +124,6 @@ export class HomeComponent implements OnInit {
   }
 
   onScrollDown (ev) {
-    console.log('scrolled down!!', ev);
-
     // add another 20 items
     const start = this.sum;
     this.sum += 20;

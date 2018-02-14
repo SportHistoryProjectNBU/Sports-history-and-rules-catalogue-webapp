@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '../node_modules/angular2-busy/build/style/busy.css';
+
 body, html {
   height: 100%;
   margin: 0;
@@ -18,3 +20,14 @@ body, html {
   background-size: cover;
 }
 
+.my-busy{
+  top: 50px;
+}
+
+.login-user {
+  display: inline-block;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

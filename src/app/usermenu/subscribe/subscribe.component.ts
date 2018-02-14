@@ -3,7 +3,7 @@ import {Component, OnInit, EventEmitter} from '@angular/core';
 
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {Observable, Observer} from 'rxjs/Rx';
+import {Observable, Observer, Subscription} from 'rxjs/Rx';
 import {MyReactiveInputEvent} from '../../home/home.component';
 import {FootballGames} from '../../home/FootballGames';
 import {Game} from '../../entities/Game';
@@ -23,18 +23,31 @@ export class SubscribeComponent implements OnInit {
   array: Game[] = [];
   searchControl: FormControl = new FormControl();
   subscribes: Subscribe[];
-  onUpdate: EventEmitter<MyReactiveInputEvent> = new EventEmitter();
+  busy: Subscription;
 
   constructor(private gameService: GameService,
               private router: Router) {
     this.footballGames = new FootballGames();
-    this.gameService.getAllSubscribesForUser().then((response) => {
-      this.subscribes = response;
-      this.gameService.getAllIncoming().then((responseBackend) => {
-        this.games = responseBackend;
-        this.appendItems(0, this.sum);
-      });
-    });
+
+    this.busy = this.gameService
+      .getAllSubscribesForUser2()
+      .subscribe(
+        data => {
+          this.subscribes = data;
+          this.gameService.getAllIncoming().then((responseBackend) => {
+            this.games = responseBackend;
+            this.appendItems(0, this.sum);
+          });
+        });
+
+
+    // this.gameService.getAllSubscribesForUser().then((response) => {
+    //   this.subscribes = response;
+    //   this.gameService.getAllIncoming().then((responseBackend) => {
+    //     this.games = responseBackend;
+    //     this.appendItems(0, this.sum);
+    //   });
+    // });
 
 
   }
@@ -113,8 +126,6 @@ export class SubscribeComponent implements OnInit {
   }
 
   onScrollDown(ev) {
-    console.log('scrolled down!!', ev);
-
     // add another 20 items
     const start = this.sum;
     this.sum += 20;

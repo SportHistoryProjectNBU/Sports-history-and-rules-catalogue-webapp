@@ -20,19 +20,21 @@ export class PersonalDataComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.name = localStorage.getItem('name') || '';
+    this.email = localStorage.getItem('email') || '';
   }
 
 
   onSubmit() {
     const user = new User();
     user.id = localStorage.getItem('id');
-    debugger;
     user.password = this.password;
     user.name = this.name;
     user.email = this.email;
     this.userService.changeUserData(user).then((resp) => {
       if (this.name) {
         localStorage.setItem('name', this.name);
+        localStorage.setItem('email', this.email);
         this.navibarListener.sendIsItLogin('change');
 
       }

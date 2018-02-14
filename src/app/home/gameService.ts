@@ -8,6 +8,7 @@ import {Game} from '../entities/Game';
 import {Comment} from '../entities/Comment';
 import {Rating} from '../entities/Rating';
 import {Subscribe} from "../entities/Subscribe";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class GameService {
@@ -17,6 +18,14 @@ export class GameService {
 
   }
 
+  getAllGamesFromAPI2() : Observable<any> {
+    const headers = new Headers();
+    headers.append('X-Auth-Token', '073055c75ffe42be95808bc4397d6a5b');
+
+    return this._http.get('http://api.football-data.org/v1/fixtures/', {
+      headers: headers
+    }).map(data => data.json() as FootballGames);
+  }
 
   getAllGamesFromAPI(): Promise<FootballGames> {
     const headers = new Headers();
@@ -97,6 +106,14 @@ export class GameService {
       withCredentials: true
     }).map((resp) => resp.json())
       .toPromise();
+  }
+
+  getAllSubscribesForUser2(): Observable<any> {
+    const subscribe = new Subscribe();
+    subscribe.userId = localStorage.getItem('id');
+    return this._http.put('/api/subscribe/userSubscribe', subscribe, {
+      withCredentials: true
+    }).map(data => data.json() as Subscribe[]);
   }
 
   getAllSubscribesForUser(): Promise<any> {

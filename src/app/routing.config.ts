@@ -17,10 +17,10 @@ const routes: Route[] = [
   {path: 'login', component: LoginComponent},
   {path: 'games/:id', component: GamesComponent, canActivate: [AuthGuard]},
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
-  {path: 'usermenu', component: UsermenuComponent, canActivate: [AuthGuard], children: [
-    {path: '', component: PersonalDataComponent, canActivate: [AuthGuard]},
+ // {path: 'usermenu', component: UsermenuComponent, canActivate: [AuthGuard], children: [
+    {path: 'usermenu', component: PersonalDataComponent, canActivate: [AuthGuard]},
     {path: 'subscribe', component: SubscribeComponent, canActivate: [AuthGuard]}
-  ]},
+ // ]},
 
 ];
 

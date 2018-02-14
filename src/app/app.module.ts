@@ -21,6 +21,8 @@ import {PersonalDataComponent} from './usermenu/personal-data/personal-data.comp
 import { SubscribeComponent } from './usermenu/subscribe/subscribe.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {ShareModule} from 'ng2share/share.module';
+import {BusyModule} from 'angular2-busy';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import {ShareModule} from 'ng2share/share.module';
     HttpModule,
     HttpClientModule,
     InfiniteScrollModule,
-    ShareModule
+    ShareModule,
+    BrowserAnimationsModule,
+    BusyModule
   ],
   providers: [LoginRegisterService, GameService, RegisterListener, AuthGuard],
   bootstrap: [AppComponent],
