@@ -1,10 +1,23 @@
-<div class="container" style="margin-top: 100px ; width: 90%"  data-infinite-scroll (scrolled)="onScrollDown()">
+<div class="container" style="margin-top: 100px ; width: 90%">
   <div class="panel panel-default" style="background-color: rgb(244, 248, 255)">
     <div class="panel-body" style="margin: 30px" loader >
       <div class="row">
 
         <h1>Games</h1>
         <h2>Schedule:</h2>
+
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+            <label>From date: </label>
+            <input [(ngModel)]="FromDateString" type="datetime-local" name="fromDate">
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <label>To date: </label>
+            <input [(ngModel)]="ToDateString" type="datetime-local" name="toDate">
+            <input type="button" class="btn btn-default" name="btnFilter" value="Filter" (click)="getByDates()">
+            <input type="button" class="btn btn-default" name="btnFilter" value="Clear" (click)="clearFilter()">
+          </div>
+        </div>
 
         <div class="form-group has-feedback">
           <label for="search" class="sr-only">Search</label>
@@ -14,7 +27,7 @@
 
         <div [ngBusy]="{busy: busy, message: 'Loading...', backdrop: true, delay: 0, minDuration: 0, wrapperClass: 'my-busy'}"></div>
 
-        <table class="table table-bordered table-hover">
+        <table class="table table-bordered table-hover" data-infinite-scroll (scrolled)="onScrollDown($event)" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50">
           <thead>
           <tr>
             <th>DATE</th>

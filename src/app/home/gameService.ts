@@ -18,7 +18,7 @@ export class GameService {
 
   }
 
-  getAllGamesFromAPI2() : Observable<any> {
+  getAllGamesFromAPI2(): Observable<any> {
     const headers = new Headers();
     headers.append('X-Auth-Token', '073055c75ffe42be95808bc4397d6a5b');
 
@@ -44,6 +44,12 @@ export class GameService {
         withCredentials: true
       })
       .toPromise();
+  }
+
+  getAllGamesFromBackend2(): Observable<any> {
+    return this._http.get('/api/games', {
+      withCredentials: true
+    }).map(data => data.json() as Game[]);
   }
 
   getAllGamesFromBackend(): Promise<Game[]> {

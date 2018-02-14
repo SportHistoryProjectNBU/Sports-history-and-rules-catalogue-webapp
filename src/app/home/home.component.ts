@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   array: Game[] = [];
   searchControl: FormControl = new FormControl();
   busy: Subscription;
+  fromDate: Date;
+  toDate: Date;
 
   constructor(private gameService: GameService,
               private router: Router) {
@@ -32,13 +34,13 @@ export class HomeComponent implements OnInit {
       .getAllGamesFromAPI2()
       .subscribe(
          data => {
-           this.footballGames=data;
+           this.footballGames = data;
            this.gameService.insertNewGame(this.footballGames.fixtures).then(_ => {
                   this.gameService.getAllGamesFromBackend().then((responseBackend) => {
                     this.games = responseBackend;
                     this.appendItems(0, this.sum);
                   });
-                })
+                });
          });
 
 
@@ -61,7 +63,34 @@ export class HomeComponent implements OnInit {
     // });
   }
 
+  get FromDateString(): string
+  {
+    return this.fromDate.toISOString().replace( 'Z', '' );
+  }
+  set FromDateString(value: string)
+  {
+    this.fromDate = new Date(value);
+  }
+
+  get ToDateString(): string
+  {
+    return this.toDate.toISOString().replace( 'Z', '' );
+  }
+  set ToDateString(value: string)
+  {
+    this.toDate = new Date(value);
+  }
+
   ngOnInit() {
+    const fromDate = new Date();
+    fromDate.setHours(0, 0, 0, 0);
+    this.fromDate = fromDate;
+
+    const toDate = new Date();
+    toDate.setDate(toDate.getDate() + 6);
+    toDate.setHours(0, 0, 0, 0);
+    this.toDate = toDate;
+
     this.searchControl.valueChanges
       .debounceTime(500)
       .distinctUntilChanged()
@@ -69,8 +98,8 @@ export class HomeComponent implements OnInit {
 
         this.array = []
 
-        let items = this.games.filter((e: Game) => {
-          return new RegExp(term, 'gi').test(e.homeTeamName) || new RegExp(term, 'gi').test(e.awayTeamName)
+        const items = this.games.filter((e: Game) => {
+          return new RegExp(term, 'gi').test(e.homeTeamName) || new RegExp(term, 'gi').test(e.awayTeamName);
         })
 
         return items;
@@ -81,8 +110,8 @@ export class HomeComponent implements OnInit {
   }
 
   search(event: MyReactiveInputEvent) {
-    let items = this.games.filter((e: Game) => {
-      return new RegExp(event.term, 'gi').test(e.homeTeamName)
+    const items = this.games.filter((e: Game) => {
+      return new RegExp(event.term, 'gi').test(e.homeTeamName);
     })
 
     Observable.from(items)
@@ -115,7 +144,9 @@ export class HomeComponent implements OnInit {
   addItems(startIndex, endIndex) {
 
     for (let i = startIndex; i < endIndex; ++i) {
-      this.array.push(this.games[i]);
+      if (this.games[i] !== undefined) {
+        this.array.push(this.games[i]);
+      }
     }
   }
 
@@ -123,14 +154,39 @@ export class HomeComponent implements OnInit {
     this.addItems(startIndex, endIndex);
   }
 
-  onScrollDown (ev) {
-    // add another 20 items
-    const start = this.sum;
-    this.sum += 20;
-    if(this.sum >= this.games.length) {
-      // do nothing
-    }else {
-      this.appendItems(start, this.sum);
+  onScrollDown () {
+    console.log('fired!!!!!');
+    if (this.games !== undefined) {
+      // add another 20 items
+      const start = this.sum;
+      this.sum += 20;
+      if (this.sum >= this.games.length) {
+        // do nothing
+      } else {
+        this.appendItems(start, this.sum);
+      }
     }
+  }
+
+  getByDates() {
+    this.busy = this.gameService.getAllGamesFromBackend2().subscribe( data => {
+      this.games = data.filter(match => {
+        const matchDate = new Date(match.date);
+        return matchDate >= this.fromDate && matchDate <= this.toDate;
+      });
+
+      this.array = [];
+      this.appendItems(0, this.sum);
+    });
+  }
+
+  clearFilter() {
+    this.busy = this.gameService.getAllGamesFromBackend2().subscribe( data => {
+      this.games = data;
+      this.array = [];
+      this.sum = 20;
+      this.appendItems(0, this.sum);
+      this.searchControl.setValue('');
+    });
   }
 }
