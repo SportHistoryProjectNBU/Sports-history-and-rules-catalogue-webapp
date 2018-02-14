@@ -15,7 +15,6 @@ export class NavigationBarComponent implements OnInit {
   login: string;
   subscription: Subscription;
   name: string;
-  user: User;
   isAdmin: string;
 
   constructor(private registerLoginService: LoginRegisterService,
